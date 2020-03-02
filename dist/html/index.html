@@ -1,1 +1,86 @@
-<!DOCTYPE html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Document</title><link rel=stylesheet href=../lib/bootstrap/dist/css/bootstrap.css><link rel=stylesheet href=../css/index.css></head><body></body><script src=../lib/jquery/dist/jquery.min.js></script><script src=../js/index.js></script></html>
+<!DOCTYPE html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>首页</title><link rel=stylesheet href=../lib/bootstrap/dist/css/bootstrap.css><link rel=stylesheet href=../css/index.css><link rel=stylesheet href=./../lib/font_ps7xl9gda6r/iconfont.css><link rel=stylesheet href=./../lib/swiper/css/swiper.min.css></head><body><header class=clear><div class="left clear"><div class=logo><img src=./../image/logo.png alt=""></div><div class=danmu><div class=danmu2>大部分地区目前已恢复物流服务，受疫情影响，有部分地区因实行交通管制，导致无法正常发货，我们将根据实际情况尽快为您发出，如有疑问请咨询QQ在线客服，给您带来不便敬请谅解！</div></div></div><div class=right><ul><li><span class="iconfont icon-ico"></span> 微信商城</li><li><span class="iconfont icon-htmal5icon31"></span> 客服咨询</li><li><span class="iconfont icon-gouwuchekong"></span> 购物车</li><li><a href=http://localhost:8080/html/login.html>你好,请登录!</a></li></ul></div></header><section id=nav class=clear><div class="nav clear"><div class=nav_top><ul class=clear></ul></div><div class="nav_box clear"><ul class=clear></ul></div></div><div class="search clear"><button>搜索</button> <input type=text value=亚索></div></section><div class=swiper-container><div class=swiper-wrapper><div class=swiper-slide><img src=https://game.gtimg.cn/images/daojushop/zb/ad/202002/20200218191636_566462.jpg alt=""></div><div class=swiper-slide><img src=https://game.gtimg.cn/images/daojushop/zb/ad/202001/20200102200831_130888.jpg alt=""></div><div class=swiper-slide><img src=https://game.gtimg.cn/images/daojushop/zb/ad/202002/20200226083352_626733.jpg alt=""></div></div><div class=swiper-pagination></div><div class=swiper-button-prev></div><div class=swiper-button-next></div></div><section id=main><ul class=clear><li><img src=https://game.gtimg.cn/images/daojushop/zb/ad/202002/20200220162928_889356.jpg alt=""><p>true Damage系列周边</p></li><li><img src=https://game.gtimg.cn/images/daojushop/zb/ad/202002/20200227090145_277795.jpg alt=""><p>喵凯系列新品</p></li><li><img src=https://game.gtimg.cn/images/daojushop/zb/ad/202001/20200102122911_141618.jpg alt=""><p>2020年新春周边</p></li><li><img src=https://game.gtimg.cn/images/daojushop/zb/ad/201911/20191130122208_751168.jpg alt=""><p>2020年LPL台历</p></li></ul></section><section id=list class=clear><dl><dt>购物指南</dt><dd>账号注册与登录</dd><dd>购买流程介绍</dd><dd>支付方式</dd><dd>常见问题</dd></dl><dl><dt>配送服务</dt><dd>全场199免运费</dd><dd>配送范围及运费</dd><dd>配送进度查询</dd></dl><dl><dt>售后服务</dt><dd>7天无理由退货</dd><dd>退货流程</dd><dd>商品送错的处理方案</dd><dd>售后服务及投诉</dd></dl><dl><dt>服务中心</dt><dd>售前咨询 售后咨询</dd><dd>客服热线：0755-25727866</dd><dd>售后：service@lolriotmall.qq.com</dd></dl></section><section id=footer class=clear><ul class=clear><li>关于商城</li><li>服务条款</li><li>合作伙伴</li><li>发育声明</li><li>经营者证件信息</li></ul><div class=left><img src=./../image/lol.png alt=""></div><div class=right><p>深圳市合泰文化发展有限公司提供客服支持 | 客服邮箱：service@lolriotmall.qq.com</p><p>Copyright (C) 1998 – 2018 Tencent. All Rights Reserved.腾讯公司 版权所有</p></div></section></body><script src=../lib/jquery/dist/jquery.min.js></script><script src=../js/index.js></script><script src=../lib/swiper/js/swiper.min.js></script><script>//字幕滚动效果
+(function(){var timer = setTimeout(this.marquee,1000);}());
+    function marquee() {
+        var scrollWidth = $('.danmu').width();
+        var textWidth = $('.danmu2').width();
+        // console.log(textWidth);
+        var i = scrollWidth;
+        setInterval(function() {
+            i--;
+            if(i < -textWidth ) {
+                i = scrollWidth;
+            }
+            $('.danmu2').animate({'left': i+'px'}, 20);
+        }, 20);
+    }
+//nav区域
+getList()
+
+function getList(){
+    $.ajax({
+        url:'./../lib/nav.json',
+        dataType:'json',
+        success:function(res){
+            console.log(res)
+        let str = ''
+        res.forEach(item=>{
+            str += `<li>${item.title}</li>`
+        })
+        $('.nav_top > ul')
+            .html(str)
+            .on({//给一个元素绑定多个事件 on{对象}
+                mouseenter:()=>$('.nav_box').stop().slideDown(),
+                mouseleave:()=>$('.nav_box').stop().slideUp()
+            })
+            .children('li')
+            .on('mouseover',function(){//给元素结合所在的元素绑定一个事件
+                const index = $(this).index()//该元素在父元素集合中的位置，是一个数字
+                // console.log(index)
+                const list = res[index].list
+                // console.log(list)
+                let str = ''
+                list.forEach(item=>{
+                    console.log(item);
+                    str += `
+                        <li>${item.name}</li>
+                    `
+                })
+                $('.nav_box > ul').html(str)
+            })
+        $('.nav_box')
+            .on({
+                mouseover:function(){$(this).finish().show()},            
+                mouseout:function(){$(this).finish().slideUp()}
+            })
+        }
+    })
+}
+//轮播图
+var mySwiper = new Swiper ('.swiper-container', {
+    // direction: 'vertical', // 垂直切换选项
+    loop: true, // 循环模式选项
+    autoplay:{
+       delay:2000 
+    },
+    effect : 'fade',
+    
+    // 如果需要分页器
+    pagination: {
+      el: '.swiper-pagination',
+    },
+    
+    // 如果需要前进后退按钮
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  })  
+  //鼠标移出隐藏按钮，移入显示按钮      
+    mySwiper.el.onmouseover=function(){
+        mySwiper.navigation.$nextEl.removeClass('hide');
+        mySwiper.navigation.$prevEl.removeClass('hide');
+    }
+    mySwiper.el.onmouseout=function(){
+        mySwiper.navigation.$nextEl.addClass('hide');
+        mySwiper.navigation.$prevEl.addClass('hide');
+    }</script></html>

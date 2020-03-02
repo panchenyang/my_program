@@ -101,7 +101,7 @@ const sassHandler = () =>{
         .pipe(sass())//把sass代码转换成css代码
         .pipe(autoprefixer())//自动添加前缀
         .pipe(cssmin())//把已经转换好的css代码压缩
-        .pipe(gulp.dest('./dist/css'))//放到指定目录
+        .pipe(gulp.dest('./dist/sass'))//放到指定目录
 }
 
 //5.书写一个移动 image 文件的方法
@@ -144,11 +144,11 @@ const sververHandler = () =>{
                     proxies:[
                      //每一个代理配置就是一个对象
                      {
-                        source:'/gx',//源，你的代理标识符
-                        target:'http://127.0.0.1/codecodecode/test.php'//目标，你要代理的地址
+                        source:'/login1',//源，你的代理标识符
+                        target:'http://localhost:80/codecodecode/login1.php'//目标，你要代理的地址
                      },{
-                        source:'/gx2',
-                        target:'http://127.0.0.1/codecodecode/xxxxxx.php'
+                        source:'/login',
+                        target:'http://localhost:80/codecodecode/login.php'
                      }
                     ]
                 }))//开启服务器

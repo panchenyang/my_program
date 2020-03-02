@@ -1,0 +1,9 @@
+form{
+    position: relative;
+}
+span{
+    position: absolute;
+    left: 250px;
+    color: red;
+    display: none;
+}

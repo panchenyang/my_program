@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+#affiche {
+    color: red;
+    display: block;
+    width: 96%;
+    height: 30px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+.affiche_text {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    line-height: 30px;
+    display: block;
+    word-break: keep-all;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+</style>
+<body>
+    
+<div id="affiche">
+	<div class="affiche_text">
+	酒店 友情提示：1.周五、周六、节假日房价有一定上调，请以官网价格为准!
+	</div>
+</div>
+</body>
+<script src="./src/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    (function(){var timer = setTimeout(this.marquee, 1000);}());
+    function marquee() {
+        var scrollWidth = $('#affiche').width();//1300
+        console.log(scrollWidth);
+        
+        var textWidth = $('.affiche_text').width();//500
+        console.log(textWidth);
+        
+        var i = scrollWidth;
+        setInterval(function() {
+            i--;
+            if(i < -textWidth ) {
+                i = scrollWidth;
+            }
+            $('.affiche_text').animate({'left': i+'px'}, 20);
+        }, 20);
+    }
+    
+    getList()
+    function getList(){
+    $.ajax({
+        url:'./src/lib/nav.json',
+        dataType:'json',
+        success:function(res){
+            console.log(res)
+        }
+    })
+}
+</script>
+</html>

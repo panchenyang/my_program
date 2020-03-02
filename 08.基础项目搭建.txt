@@ -1,0 +1,26 @@
+1. 创建一个文件夹（作为我的项目文件夹）
+2. npm init -y  
+   ->出现package.json(记录项目的描述信息) -> npm i下载里面的包
+3. git init
+   ->(生成.git,表示我们的项目被git管理了，准备上传)
+4. 准备源码文件夹 src
+   -> css 和 sass 你选择一个就可以了
+5. 准备 gulpfile.js 文件
+   -> 打包设置
+6. 准备一个 .gitignore 的文件
+   -> 在里面写上 node_modules
+   -> 写上的目的就是上传 github 的时候不上传 node_modules 文件夹里面的所有内容
+7. 每天写的项目上传
+   -> 每天写每天上传
+   -> 可以开很多分支, 也可以不开
+
+git status                          -> 查看暂存区
+git add .                           -> 工作区添加内容 添加到暂存区
+git commit -m "本次版本的说明"        -> 暂存区内容 形参历史版本
+git remote add origin 远程仓库地址    -> 上传到远程仓库 github
+git push -u origin master            ->  上传代码
+git push                             ->  同一个文件第二次上传 直接git push
+
+每天 git add .
+   git conmmit -m "第二天"
+   git push
