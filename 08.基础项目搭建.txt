@@ -22,5 +22,5 @@ git push -u origin master            ->  上传代码
 git push                             ->  同一个文件第二次上传 直接git push
 
 每天 git add .
-   git conmmit -m "第二天"
+   git commit -m "第二天"
    git push

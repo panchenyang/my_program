@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品细节页面</title>
+    <link rel="stylesheet" href="../css/detail.css">
+    <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <h1>商品细节页面</h1>
+    <hr>
+    <div class="container">
+        <!-- <div class="left">
+            <img src="https://game.gtimg.cn/images/zb/x5/uploadImg/goods/202001/20200102113521_76451.big.jpg" alt="">
+        </div>
+        <div class="right">
+            <p>优米卫衣</p>
+            <hr>
+            <p>现价：￥270.00</p>
+            <hr>
+        颜色 : <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default">白色</button>
+                <button type="button" class="btn btn-default">蓝色</button>
+                <button type="button" class="btn btn-default">绿色</button>
+            </div><br>
+            <hr>
+        尺码 : <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default">XS</button>
+                <button type="button" class="btn btn-default">S</button>
+                <button type="button" class="btn btn-default">M</button>
+                <button type="button" class="btn btn-default">L</button>
+                <button type="button" class="btn btn-default">XL</button>
+                <button type="button" class="btn btn-default">XXL</button>
+            </div><br>
+            <hr>
+            <button class="btn btn-success">加入购物车</button>
+            <a href="http://localhost:8080/html/cart.html"><button class="tiaozhuan">跳转购物车</button></a>
+        </div> -->
+        
+    </div>
+</body>
+<script src="../js/detail.js"></script>
+<script src="../lib/jquery/dist/jquery.min.js"></script>
+<script src="../js/cookie.js"></script>
+<script>
+    //1.获取localstorage里面的数字
+    const productinfo = JSON.parse(localStorage.getItem('product_info'))
+    if(productinfo == null){
+        alert('没有您要查看的商品详情信息，请去列表页点击你要查看的商品')
+        location.href = 'http://localhost:8080/html/list.html'
+    }
+    console.log(productinfo);
+    //2.渲染数据
+    let str = ''
+    str = `
+    <div class="left">
+            <img src="${productinfo.src}" alt="">
+        </div>
+        <div class="right">
+            <p>${productinfo.name}</p>
+            <hr>
+            <p>现价：${productinfo.price}元</p>
+            <hr>
+        颜色 : <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default">白色</button>
+                <button type="button" class="btn btn-default">蓝色</button>
+                <button type="button" class="btn btn-default">绿色</button>
+            </div><br>
+            <hr>
+        尺码 : <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default">XS</button>
+                <button type="button" class="btn btn-default">S</button>
+                <button type="button" class="btn btn-default">M</button>
+                <button type="button" class="btn btn-default">L</button>
+                <button type="button" class="btn btn-default">XL</button>
+                <button type="button" class="btn btn-default">XXL</button>
+            </div><br>
+            <hr>
+            <button class="btn btn-success addcart">加入购物车</button>
+            <a href="http://localhost:8080/html/cart.html"><button class="tiaozhuan btn btn-info">跳转购物车</button></a>
+        </div>
+    `
+    $('.container').html(str)
+
+    //3.添加购物车按钮添加点击事件
+    $('.addcart').on('click',function(){
+        console.log('我要添加购物车了');
+        //3-2 判断是否登录
+        let login = getcookie('login')//查询cookie，login表示key
+        if(login === ''){
+            window.location.href = 'http://localhost:8080/html/login.html'
+        }else{
+            //3-3加入到购物车数组里面   如果没有就用空数组代码
+            const cartList = JSON.parse(localStorage.getItem('cartList'))  || []
+            // console.log(cartList);
+            //3-4向数组里添加本条数据
+            //3-5判断加入购物车的时候,如果原先这个数据，就不需要push，如果没有就push
+            let exits = cartList.some(item=>{
+                return item.id === productinfo.id//数组里面的每一个id  === 本页面这条数据id 
+            })
+            //exits返回值为false或者true   如果返回flalse 表示数组里面没有就push，如果返回true表示有，就加1
+            console.log(exits);
+            if(exits){
+                //找到这个信息让他num++
+                let data = null
+                for(let i=0;i<cartList.length;i++){
+                    if(cartList[i].id === productinfo.id){
+                        data = cartList[i]
+                    }
+                }
+                data.num++
+                // data.xiaoji = data.num * data.price
+            }else{
+                //push之前添加一些信息
+                productinfo.num = 1
+                // productinfo.xiaoji = productinfo.price
+                productinfo.isSelect = false
+                productinfo._id = create_id()
+                cartList.push(productinfo)
+            }
+            //3-6在存储到localstorage里面
+            localStorage.setItem('cartList',JSON.stringify(cartList))
+        }
+    })
+
+//封装随机生成id的函数
+let create_id=()=>{
+    let str = '123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'
+    let id = ''
+    for(let i=0;i<16;i++){
+        let index = Math.floor(Math.random()*63)
+        id += str.charAt(index)
+    }
+    return id
+}
+</script>
+</html>

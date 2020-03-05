@@ -5,17 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>登录页面</title>
     <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.min.css">
 </head>
+
 <body>
-    <h1>登录页面</h1>
-    <form action="">
+<div class="container">
+        <h1>登录页面</h1>
+    <form action="" class="form-group">
         <span>用户名或密码错误,登录失败</span>
-        用户名：<input type="text" class="username"><br>
-        密码：<input type="text" class="userpwd"><br>
-        <button class="denglu">登录</button>
-        <button class="zhuce">注册</button>
+        用户名：<input type="text" class="username form-control" placeholder="请输入用户名"><br>
+        密码：<input type="text" class="userpwd form-control" placeholder="请输入密码"><br>
+        <button class="denglu btn-success">登录</button>
+        <button class="zhuce btn-success ">注册</button>
     </form>
+</div>
 </body>
+
 <script src="../js/login.js"></script>
 <script src="../lib/jquery/dist/jquery.min.js"></script>
 <script>

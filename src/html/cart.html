@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车页面</title>
+    <link rel="stylesheet" href="../css/cart.css">
+    <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h3 class="text-center">购物车</h3>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>全选
+                        <input type="checkbox" id="selectAll">
+                    </th>
+                    <th>商品图片</th>
+                    <th>商品名称</th>
+                    <th>商品价格</th>
+                    <th>商品数量</th>
+                    <th>小计</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="tb" >
+                <!-- <td><input type="checkbox" class="checkbox"></td>
+                <td><img src="https://game.gtimg.cn/images/zb/x5/uploadImg/goods/202001/20200102113521_76451.big.jpg" alt=""></td>
+                <td style="width: 45%;">优米卫衣</td>
+                <td>270</td>
+                <td>
+                    <input type="button" value="-" class="btn btn-info btn-sm subtract" _id="${product.page_id}">
+                    <input type="text" value="1">
+                    <input type="button" value="+" class="btn btn-info btn-sm add" _id="${product.page_id}">
+                </td>
+                <td>270</td> -->
+            </tbody>
+        </table>
+        <input type="button" value="删除所选" class="btn btn-danger" id="shanchusuoxuan"> 
+        <hr>  
+            <h2>总计:<span id="total"></span>元</h2>
+            <button class="btn btn-success btn-lg " id="jiesuan">去结算</button>
+    </div>
+</body>
+<script src="../js/cart.js"></script>
+<script>
+let c = ele =>document.createElement(ele)
+let $ = ele =>{
+    let e = null;
+    if(ele.charAt(0) === '#'){
+        e = document.querySelector(ele)
+    }else{
+        e = document.querySelectorAll(ele)
+    }
+    return e
+}
+    //1.获取localstorage中cartList中的数据
+    const arr = JSON.parse(localStorage.getItem('cartList'))
+    // console.log(arr);
+    //2.判断有没有数据
+    if(arr == null){
+        alert('您的购物车还没有东西，快去选购吧！')
+        location.href = 'http://localhost:8080/html/list.html'
+    }
+
+//创建table的函数
+let creat_table = (arr)=>{
+    $('#tb').innerHTML = ""//每次添加的时候将tb下面的值清空，就不会出现上一次添加的了
+    for(let product of arr){//遍历数组对象中的每个值
+        let tr = c('tr')
+        let str =`
+            <td><input type="checkbox" class="checkbox"></td>
+            <td><img src="${product.src}" alt=""></td>
+            <td style="width: 45%;">${product.name}</td>
+            <td>${product.price}</td>
+            <td>
+                <input type="button" value="-" class="btn btn-info btn-sm subtract" _id="${product._id}">
+                <input type="text" value="${product.num}">
+                <input type="button" value="+" class="btn btn-info btn-sm add" _id="${product._id}">
+            </td>
+            <td>${product.xiaoji}</td>
+        `
+        tr.innerHTML = str
+        let td_del = c('td')//创建一个td存放input按钮
+        let del_btn = c('input')
+        del_btn.type = 'button'
+        del_btn.value = '删除'
+        del_btn.className = 'btn btn-danger'
+        //打标记
+        del_btn._id = product._id   
+        
+        //为删除按钮绑定事件
+        del_btn.onclick = function(){
+            let arr = JSON.parse(localStorage.getItem("cartList"))//获取购物车中的数据
+            arr = arr.filter(product =>{//filter是筛选数组中符合要求的元素，返回的是符合要求的元素的集合
+                return product._id !== this._id//在数组中删除，符合的就返回出去就删了。 这个arr中就没有符合当前条件的数据了。
+            })
+            localStorage.setItem("cartList",JSON.stringify(arr))//再把他加入到localstorage中
+            creat_table(arr)//重新渲染页面
+            price()
+        }
+        td_del.appendChild(del_btn)//将删除按钮放入td
+        tr.appendChild(td_del)
+        $("#tb").appendChild(tr)
+    }
+    //当点击减少按钮时
+    for(let i=0;i<$('.subtract').length;i++){
+        $('.subtract')[i].addEventListener("click",function(){
+            change_product_num(this.getAttribute("_id"),"-")//获取 减号按钮对象 的 id属性的值
+            price()
+        })
+    }
+    //当点击增加按钮时
+    for(let i=0;i<$('.add').length;i++){
+        $('.add')[i].addEventListener("click",function(){
+            change_product_num(this.getAttribute("_id"),"+")//获取指定属性的值
+            price()
+        })
+    }
+}
+creat_table(arr)//执行一下函数，重新渲染一下页面
+
+//全选/全不选功能
+let checkboxs = $('.checkbox')
+//当点击全选框时，让全选框的checked属性等于每一个多选框的checked顺序ing
+$('#selectAll').onclick = function(){
+    for(let i=0;i<checkboxs.length;i++){
+        checkboxs[i].checked = $('#selectAll').checked
+    }    
+}
+
+//删除所选功能
+$('#shanchusuoxuan').onclick = function(){
+    for(let i=0;i<checkboxs.length;i++){
+        if(checkboxs[i].checked){
+            $('#tb').removeChild(checkboxs[i].parentNode.parentNode)
+            price()
+        }
+    }
+}
+
+//封装加减商品的函数
+function change_product_num(id,ope){
+    let arr = JSON.parse(localStorage.getItem("cartList"))
+    for(let product of arr){
+        // console.log(product);
+        //找出id一样的商品
+        if(product._id === id){//如果商品的id等于原来设置的16为id，才执行下面代码
+            //判断需要加还是减
+            if(ope === "+"){
+                product.num++
+            }else{
+                if(product.num <= 1){
+                    alert("不能在少啦！！！！")
+                }else{
+                    product.num--
+                }
+            }
+        }
+    }
+    //重新渲染页面
+    creat_table(arr)
+    //写入数据，更新localstorage中的数据
+    localStorage.setItem("cartList",JSON.stringify(arr))
+}
+
+//计算商品的数量和价格的函数
+function price(){
+    let total = 0;//总价
+    let shuliang;//数量
+    let danjia;//单价
+    let xiaoji;//小计
+    //获取每一行，然后遍历每一行
+    let trs = $('#tb').getElementsByTagName('tr')//trs获取的是tr的集合
+    for(let items of trs){//items是每一行
+        danjia = items.getElementsByTagName('td')[3].innerText//138
+        // console.log(danjia);
+        shuliang = items.getElementsByTagName('td')[4].getElementsByTagName('input')[1].value//1
+        // console.log(shuliang);
+        xiaoji = danjia*shuliang
+        items.getElementsByTagName('td')[5].innerText=xiaoji//把小计加入到列表中
+        total += xiaoji
+    }
+    $('#total').innerText = total//把总和加入总和total的下面
+}
+window.onload = price;
+
+$('#jiesuan').onclick = function(){
+    alert('^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^^_^')
+}
+
+</script>
+</html>

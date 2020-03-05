@@ -5,14 +5,155 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>列表页面</title>
     <link rel="stylesheet" href="../css/list.css">
+    <link rel="stylesheet" href="../lib/bootstrap/dist/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="../lib/pagination/pagination.css"> -->
 </head>
 <body>
-    
+    <div class="container">
+        <h3 class="text-center">英雄联盟周边商城</h3>
+        <input type="button" value="价格升序" class="btn btn-info sort_top" id="sort_top">
+        <input type="button" value="价格降序" class="btn btn-info" id="sort_buttom">
+        <hr>
+        <div class="main" id="main">
+            <ul>
+                <!-- <li>
+                    <p><img src="${ item.src }" alt=""></p>
+                    <p class="price">${ item.price }</p>
+                    <p class="title">${ item.name }</p>
+                </li> -->
+            </ul>
+        </div>
+        <div class="pagi m-style"></div>
+    </div>
 </body>
 <script src="../js/list.js"></script>
+<script src="../lib/jquery/dist/jquery.min.js"></script>
+<script src="./../lib/pagination/pagination.js"></script>
 <script>
-    var ogoodsListApi = {"ret":0,"msg":"success","sandbox":"false","serverTime":1583187006,"now":"2020-03-03 06:10:06","from_cache":false,"data":{"total":"31","list":[{"sBizCode":"lol","sWaterMarkInfo":"{\"beginshow\":\"1970-01-01 00:00:00\",\"endshow\":\"2030-01-01 00:00:00\"}","dtSellBegin":"2020-02-26 00:00:00","dtSellEnd":"2030-12-31 23:59:59","iMallId":"13081","sMallName":"\u55b5\u51ef\u732b\u54aa\u80f8\u9488","sProfileImg":"https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/202002\/20200225164738_74248.jpg","sMallBrief":"2\u670829\u65e5\u5f00\u59cb\u53d1\u8d27","iShipFree":"0","iVipPrice":"4900","iOriPrice":"4900","iPrice":"4900","iCatId":"210","iTagId":"286","iWaterMark":"3","iSoldNum":"8","iActionId":"0","iComments":"0","iTotalSoldNum":"8","iTotalMallQty":"25","iMallQty":"25","iPromotePrice":"0","iVipPromotePrice":"0","dtPromoteStart":"0000-00-00 00:00:00","dtPromoteEnd":"0000-00-00 00:00:00","iSuppliersId":"619","sBuyLimit":{"count":1,"list":[{"type":"action_goods","limittype":"0","limitnum":25}],"iSingleBuyLimit":0},"iSupportCoupon":"0","iCustomize":"0","iPriceReal":"4900","iJDDeduct":"0","sJDDeductInfo":"0","sTuanInfo":"","sCoverInfo":null,"iGoodsGroupId":"0","iGoodsGroupLeader":"1","sDetailImg":["https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/202002\/20200225162119_68386.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/202002\/20200225162123_76798.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/202002\/20200225162126_16411.jpg"]},{"sBizCode":"lol","sWaterMarkInfo":"{\"beginshow\":\"1970-01-01 00:00:00\",\"endshow\":\"2030-01-01 00:00:00\"}","dtSellBegin":"2020-02-26 00:00:00","dtSellEnd":"2030-12-31 23:59:59","iMallId":"13082","sMallName":"\u55b5\u51ef\u732b\u54aa\u94a5\u5319\u73af","sProfileImg":"https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/202002\/20200225164810_87412.jpg","sMallBrief":"2\u670829\u65e5\u5f00\u59cb\u53d1\u8d27","iShipFree":"0","iVipPrice":"4900","iOriPrice":"4900","iPrice":"4900","iCatId":"210","iTagId":"286","iWaterMark":"3","iSoldNum":"14","iActionId":"0","iComments":"0","iTotalSoldNum":"14","iTotalMallQty":"90","iMallQty":"90","iPromotePrice":"0","iVipPromotePrice":"0","dtPromoteStart":"0000-00-00 00:00:00","dtPromoteEnd":"0000-00-00 00:00:00","iSuppliersId":"619","sBuyLimit":{"count":1,"list":[{"type":"action_goods","limittype":"0","limitnum":90}],"iSingleBuyLimit":0},"iSupportCoupon":"0","iCustomize":"0","iPriceReal":"4900","iJDDeduct":"0","sJDDeductInfo":"0","sTuanInfo":"","sCoverInfo":null,"iGoodsGroupId":"0","iGoodsGroupLeader":"1","sDetailImg":["https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/202002\/20200225161842_19450.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/202002\/20200225164816_27745.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/202002\/20200225161846_38841.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/202002\/20200225161850_71955.jpg"]},{"sBizCode":"lol","sWaterMarkInfo":"{\"beginshow\":\"1970-01-01 00:00:00\",\"endshow\":\"2030-01-01 00:00:00\"}","dtSellBegin":"2020-02-26 00:00:00","dtSellEnd":"2030-12-31 23:59:59","iMallId":"13083","sMallName":"\u82f1\u96c4\u8054\u76df\u8868\u60c5\u80f8\u9488\u5957\u88c5","sProfileImg":"https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/202002\/20200225163800_36598.jpg","sMallBrief":"2\u670829\u65e5\u5f00\u59cb\u53d1\u8d27","iShipFree":"0","iVipPrice":"10800","iOriPrice":"10800","iPrice":"10800","iCatId":"210","iTagId":"286","iWaterMark":"3","iSoldNum":"0","iActionId":"0","iComments":"0","iTotalSoldNum":"1","iTotalMallQty":"135","iMallQty":"45","iPromotePrice":"0","iVipPromotePrice":"0","dtPromoteStart":"0000-00-00 00:00:00","dtPromoteEnd":"0000-00-00 00:00:00","iSuppliersId":"619","sBuyLimit":{"count":1,"list":[{"type":"action_goods","limittype":"0","limitnum":45}],"iSingleBuyLimit":0},"iSupportCoupon":"0","iCustomize":"0","iPriceReal":"10800","iJDDeduct":"0","sJDDeductInfo":"0","sTuanInfo":"","sCoverInfo":null,"iGoodsGroupId":"13083","iGoodsGroupLeader":"1","sDetailImg":["https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/202002\/20200225163803_44772.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/202002\/20200225163805_98061.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/202002\/20200225163808_86828.jpg"]},{"sBizCode":"lol","sWaterMarkInfo":"{\"beginshow\":\"2019-12-09 21:36:57\",\"endshow\":\"2020-03-09 21:36:57\"}","dtSellBegin":"2019-12-10 10:00:00","dtSellEnd":"2030-12-01 11:31:54","iMallId":"12440","sMallName":"\u9b44\u7f57\u5fbd\u7ae0\u5957\u88c5","sProfileImg":"https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201912\/20191209213703_49759.jpg","sMallBrief":"\u6bcf\u5957\u5305\u542b3\u4e2a","iShipFree":"0","iVipPrice":"10800","iOriPrice":"10800","iPrice":"10800","iCatId":"210","iTagId":"272","iWaterMark":"3","iSoldNum":"42","iActionId":"0","iComments":"0","iTotalSoldNum":"94","iTotalMallQty":"130","iMallQty":"50","iPromotePrice":"0","iVipPromotePrice":"0","dtPromoteStart":"0000-00-00 00:00:00","dtPromoteEnd":"0000-00-00 00:00:00","iSuppliersId":"619","sBuyLimit":{"count":2,"list":[{"type":"action_goods","limittype":"0","limitnum":50},{"type":"action_goods_user","limittype":"0","limitnum":"5"}],"iSingleBuyLimit":5},"iSupportCoupon":"1","iCustomize":"0","iPriceReal":"10800","iJDDeduct":"0","sJDDeductInfo":"0","sTuanInfo":"","sCoverInfo":null,"iGoodsGroupId":"12440","iGoodsGroupLeader":"1","sDetailImg":["https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201912\/20191209213705_91433.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201912\/20191209213706_33541.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201912\/20191209213707_15857.jpg"]},{"sBizCode":"lol","sWaterMarkInfo":"{\"beginshow\":\"2020-01-02 12:56:45\",\"endshow\":\"2020-04-04 12:56:45\"}","dtSellBegin":"2019-12-31 12:01:40","dtSellEnd":"2029-12-31 12:01:40","iMallId":"12806","sMallName":"\u7ea6\u5fb7\u5c14\u4eba\u80f8\u9488\u5957\u88c5","sProfileImg":"https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/202001\/20200102193636_20871.jpg","sMallBrief":"","iShipFree":"0","iVipPrice":"10800","iOriPrice":"10800","iPrice":"10800","iCatId":"210","iTagId":"0","iWaterMark":"3","iSoldNum":"7","iActionId":"0","iComments":"0","iTotalSoldNum":"7","iTotalMallQty":"30","iMallQty":"30","iPromotePrice":"0","iVipPromotePrice":"0","dtPromoteStart":"0000-00-00 00:00:00","dtPromoteEnd":"0000-00-00 00:00:00","iSuppliersId":"619","sBuyLimit":{"count":2,"list":[{"type":"action_goods","limittype":"0","limitnum":"30"},{"type":"action_goods_user","limittype":"0","limitnum":"5"}],"iSingleBuyLimit":5},"iSupportCoupon":"1","iCustomize":"0","iPriceReal":"10800","iJDDeduct":"0","sJDDeductInfo":"0","sTuanInfo":"","sCoverInfo":null,"iGoodsGroupId":"0","iGoodsGroupLeader":"1","sDetailImg":["https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/202001\/20200102193639_89843.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/202001\/20200102193640_26632.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/202001\/20200102193643_77824.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/202001\/20200102193645_42890.jpg"]},{"sBizCode":"lol","sWaterMarkInfo":"{\"beginshow\":\"2019-10-21 17:34:15\",\"endshow\":\"2020-01-20 17:34:15\"}","dtSellBegin":"2019-10-21 17:34:15","dtSellEnd":"2029-10-21 17:34:15","iMallId":"11187","sMallName":"\u4e07\u5723\u8282\u5ce1\u8c37\u4f20\u8bf4\u80f8\u9488\u5957\u88c5","sProfileImg":"https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201910\/20191021173935_59600.jpg","sMallBrief":"","iShipFree":"0","iVipPrice":"10800","iOriPrice":"10800","iPrice":"10800","iCatId":"210","iTagId":"0","iWaterMark":"0","iSoldNum":"28","iActionId":"0","iComments":"0","iTotalSoldNum":"28","iTotalMallQty":"40","iMallQty":"40","iPromotePrice":"0","iVipPromotePrice":"0","dtPromoteStart":"0000-00-00 00:00:00","dtPromoteEnd":"0000-00-00 00:00:00","iSuppliersId":"619","sBuyLimit":{"count":2,"list":[{"type":"action_goods","limittype":"0","limitnum":"40"},{"type":"action_goods_user","limittype":"0","limitnum":"5"}],"iSingleBuyLimit":5},"iSupportCoupon":"1","iCustomize":"0","iPriceReal":"10800","iJDDeduct":"0","sJDDeductInfo":"0","sTuanInfo":"","sCoverInfo":null,"iGoodsGroupId":"0","iGoodsGroupLeader":"1","sDetailImg":["https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201910\/20191021173946_29096.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201910\/20191021173948_34559.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201910\/20191021173950_83763.jpg"]},{"sBizCode":"lol","sWaterMarkInfo":"","dtSellBegin":"2019-01-18 00:00:00","dtSellEnd":"2022-01-01 10:24:14","iMallId":"8285","sMallName":"\u53ec\u5524\u5e08\u5ce1\u8c37 \u5145\u7535\u5b9d","sProfileImg":"https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201902\/20190215000431_93759.jpg","sMallBrief":"\u652f\u6301\u65e0\u7ebf\u5145\u7535 10000mA\u8d85\u5927\u5bb9\u91cf","iShipFree":"0","iVipPrice":"29800","iOriPrice":"29800","iPrice":"29800","iCatId":"210","iTagId":"162","iWaterMark":"0","iSoldNum":"2772","iActionId":"0","iComments":"10","iTotalSoldNum":"2772","iTotalMallQty":"3000","iMallQty":"3000","iPromotePrice":"25400","iVipPromotePrice":"25400","dtPromoteStart":"2020-01-02 12:00:00","dtPromoteEnd":"2020-02-09 23:59:59","iSuppliersId":"619","sBuyLimit":{"count":2,"list":[{"type":"action_goods","limittype":"0","limitnum":"3000"},{"type":"action_goods_user","limittype":"0","limitnum":"5"}],"iSingleBuyLimit":0},"iSupportCoupon":"1","iCustomize":"0","iPriceReal":"29800","iJDDeduct":"0","sJDDeductInfo":"0","sTuanInfo":"","sCoverInfo":null,"iGoodsGroupId":"0","iGoodsGroupLeader":"1","sDetailImg":["https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201901\/20190114204105_99621.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201901\/20190114204107_55208.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201901\/20190114204109_49576.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201901\/20190114204111_32714.jpg"]},{"sBizCode":"lol","sWaterMarkInfo":"","dtSellBegin":"2019-01-18 00:00:00","dtSellEnd":"2022-06-01 10:11:22","iMallId":"8279","sMallName":"\u98de\u9f99\u5728\u5929 \u76f2\u50e7\u81b3\u9b54\u5e08 \u4fdd\u6e29\u676f","sProfileImg":"https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201902\/20190215000506_63254.jpg","sMallBrief":"","iShipFree":"0","iVipPrice":"26800","iOriPrice":"26800","iPrice":"26800","iCatId":"210","iTagId":"0","iWaterMark":"0","iSoldNum":"2169","iActionId":"0","iComments":"12","iTotalSoldNum":"2169","iTotalMallQty":"2500","iMallQty":"2500","iPromotePrice":"22800","iVipPromotePrice":"22800","dtPromoteStart":"2020-01-02 12:00:00","dtPromoteEnd":"2020-02-09 23:59:59","iSuppliersId":"619","sBuyLimit":{"count":2,"list":[{"type":"action_goods","limittype":"0","limitnum":"2500"},{"type":"action_goods_user","limittype":"0","limitnum":"5"}],"iSingleBuyLimit":0},"iSupportCoupon":"1","iCustomize":"0","iPriceReal":"26800","iJDDeduct":"0","sJDDeductInfo":"0","sTuanInfo":"","sCoverInfo":null,"iGoodsGroupId":"0","iGoodsGroupLeader":"1","sDetailImg":["https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201901\/20190114204832_28780.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201901\/20190114204841_78638.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201901\/20190114204843_32713.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201901\/20190114204845_19997.jpg"]},{"sBizCode":"lol","sWaterMarkInfo":"{\"beginshow\":\"1970-01-01 00:00:00\",\"endshow\":\"2030-01-01 00:00:00\"}","dtSellBegin":"2019-06-29 10:00:00","dtSellEnd":"2029-06-01 16:31:29","iMallId":"9333","sMallName":"\u7535\u73a9\u676f\u57ab\u5957\u88c5 ","sProfileImg":"https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201906\/20190627182630_87279.jpg","sMallBrief":"","iShipFree":"0","iVipPrice":"7500","iOriPrice":"7500","iPrice":"7500","iCatId":"210","iTagId":"200","iWaterMark":"3","iSoldNum":"44","iActionId":"0","iComments":"0","iTotalSoldNum":"44","iTotalMallQty":"60","iMallQty":"60","iPromotePrice":"0","iVipPromotePrice":"0","dtPromoteStart":"0000-00-00 00:00:00","dtPromoteEnd":"0000-00-00 00:00:00","iSuppliersId":"619","sBuyLimit":{"count":2,"list":[{"type":"action_goods","limittype":"0","limitnum":"60"},{"type":"action_goods_user","limittype":"0","limitnum":"5"}],"iSingleBuyLimit":0},"iSupportCoupon":"1","iCustomize":"0","iPriceReal":"7500","iJDDeduct":"0","sJDDeductInfo":"0","sTuanInfo":"","sCoverInfo":null,"iGoodsGroupId":"0","iGoodsGroupLeader":"1","sDetailImg":["https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201906\/20190627182633_29483.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201906\/20190627182635_36274.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201906\/20190627182638_46148.jpg","https:\/\/game.gtimg.cn\/images\/zb\/x5\/uploadImg\/goods\/201906\/20190627182641_96154.jpg"]}]}}
-    console.log(ogoodsListApi);
-    
+//准备一个变量接收数组
+var list2 = []
+
+//1.获取数据
+getList()
+function getList(){
+    $.ajax({
+        url:'./../lib/list.json',
+        dataType:'json',
+        success:function(res){
+            // console.log(res);
+            //2.渲染分页器
+            $('.pagi').pagination({
+                pageCount: Math.ceil(res.length/10), // 总页数
+                current: 1, // 当前页
+                jump: true,
+                coping: true,
+                homePage: '首页', // 首页按钮的文本
+                endPage: '末页', // 末页按钮的文本
+                prevContent: '上页',
+                nextContent: '下页',
+                callback: function (api) { // 当你切换页面的时候会触发
+                    // api.getCurrent() 获取当前是第几页
+                    let curr = api.getCurrent()
+                    // console.log(curr);
+                    //根据是第几页，从我的总数组中筛选出一部分数据
+                    var list = res.slice((curr - 1) * 10,curr * 10 - 1 + 1)
+                    // console.log(list);
+                    //3-2.每次使用分页器 切换的时候渲染一次
+                    bindHtml(list)
+                }
+            })
+            //3.先把第一页的数据渲染一次
+            bindHtml(res.slice(0,10))
+            
+            //2排序-给全局变量赋值
+            list2 = res
+        }
+    })
+}
+//渲染页面的函数
+function bindHtml(list){
+    // console.log(list);
+    //根据list数组渲染数组
+    let str = ""
+        list.forEach(item=>{
+            // data-id=${item.id}   添加一个自定义属性，用来打标记，和元素的id没关系
+            str += `
+            <li data-id=${item.id}>
+                <p><img src="${ item.src }" alt=""></p>
+                <p class="price">${ item.price }元</p>
+                <p class="title">${ item.name }</p>
+            </li>
+        `
+            $('.main > ul').html(str)
+        })
+        
+}
+
+//2.排序
+var sort_top = document.querySelector('#sort_top')
+sort_top.onclick = function(){
+    list2.sort(function(a,b){ 
+        // console.log(a.id);
+        // console.log(a.price);
+        return b.id - a.id
+    })
+    // console.log(list2);
+    $('.pagi').pagination({
+        pageCount: Math.ceil(list2.length / 10), // 总页数
+        current: 1, // 当前页
+        jump: true,
+        coping: true,
+        homePage: '首页', // 首页按钮的文本
+        endPage: '末页', // 末页按钮的文本
+        prevContent: '上页',
+        nextContent: '下页',
+        callback: function (api) { // 当你切换页面的时候会触发
+            let curr = api.getCurrent()
+            // console.log(curr)
+            var list = list2.slice((curr - 1) * 10, curr * 10)
+            // 3-2. 每次使用分页器切换的时候渲染一次
+            bindHtml(list)
+        }
+    })
+
+    // 3. 先把第一页的数据渲染一次
+    bindHtml(list2.slice(0, 10))
+}
+
+//3.点击委托事件
+$('ul').on('click','li',function(){
+    // console.log(this);
+    const id = $(this).data('id')//拿到点击的那个li身上的id属性
+    // console.log(id);
+    //从总的数据里面找到id配套的那个数据
+    let data = {}
+
+    for(let i=0;i<list2.length;i++){
+        if(list2[i].id === id){
+            data = list2[i]
+            break
+        }
+    }
+    //4.要把这一条数据那刀detail.html里面渲染
+    //跨页面，所有把这个数据存在localstorage里面，到时候再拿出来
+    // console.log(data);
+    localStorage.setItem('product_info',JSON.stringify(data))
+
+    //跳转页面
+    location.href = 'http://localhost:8080/html/detail.html'
+})
+
+
+//分页效果
+/*
+    1.需要一个分页器(pagination插件)，去网上扒来 pagination的css和js文件
+    2.引入js，和css，准备一个<div class="pagi m-style"></div>容器，一个类名是js，一个是css
+    3.获取数据
+        =>1.渲染分页器  pageCount总页数=总数据/一页要显示多少条
+        =>2.先把第一页的数据渲染一次 -> bindHtml(res.slice(0,10))，这个函数是渲染页面的，参数是渲染多少数据
+        =>3.每次点击分页器切换的时候，在渲染一次
+*/
+
+
 </script>
 </html>
