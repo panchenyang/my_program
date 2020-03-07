@@ -4,27 +4,83 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="./src/lib/pagination/pagination.css">
+  <!-- <link rel="stylesheet" href="./src/lib/pagination/pagination.css"> -->
 </head>
 <body>
-  <div class="pagi m-style"></div>
+  <!-- <div class="pagi m-style"></div> -->
+  <!-- <img src="./123/images/thumb.jpg" data-large="./123/images/thumb.jpg" alt="Image To Zoom" class="example my-foto">  -->
+  <img class="my-foto" src="./123/images/thumb.jpg"  data-large="./123/images/thumb.jpg" 
+  data-text-bottom="Осень-зима 2018/14 / Ready-To-Wear / НЕДЕЛЯ МОДЫ: Нью-Йорк" title="Фото">
 </body>
 <script src="./src/lib/jquery/dist/jquery.min.js"></script>
-<script src="./src/lib/pagination/pagination.js"></script>
+<!-- <script src="./src/lib/pagination/pagination.js"></script> -->
+<script src="./123/js/zoomsl.min.js"></script>
 <script>
-   $('.pagi').pagination({
-                pageCount: 10, // 总页数
-                current: 1, // 当前页
-                jump: true,
-                coping: true,
-                homePage: '首页', // 首页按钮的文本
-                endPage: '末页', // 末页按钮的文本
-                prevContent: '上页',
-                nextContent: '下页',
-                callback: function (api) { // 当你切换页面的时候会触发
-                // api.getCurrent() 获取当前是第几页
-                console.log(api.getCurrent())
-                }
-            })
+  //  $('.pagi').pagination({
+  //               pageCount: 10, // 总页数
+  //               current: 1, // 当前页
+  //               jump: true,
+  //               coping: true,
+  //               homePage: '首页', // 首页按钮的文本
+  //               endPage: '末页', // 末页按钮的文本
+  //               prevContent: '上页',
+  //               nextContent: '下页',
+  //               callback: function (api) { // 当你切换页面的时候会触发
+  //               // api.getCurrent() 获取当前是第几页
+  //               console.log(api.getCurrent())
+  //               }
+  //           })
+  $(function(){
+  $(".example").imagezoomsl();
+});
+
+$(".example").imagezoomsl({
+ 
+ // shows the magnifying glass container
+ cursorshade: true,
+
+ // cursor type
+ magnifycursor: 'crosshair',
+
+ // background color of the magnifying glass container
+ cursorshadecolor: '#fff', 
+
+ // opacity of the magnifying glass container
+ cursorshadeopacity: 0.3,
+
+ // border styles
+ cursorshadeborder: '1px solid black',
+
+ // z-index property
+ zindex: '', 
+
+ // zoom step
+ stepzoom: 0.5,
+
+ // zoom range  
+ zoomrange: [2, 2], 
+
+ // start zoom level
+ zoomstart: 2,
+
+ // disables the scrolling of the document with the mouse wheel when the cursor is over the image
+ disablewheel: true
+
+}); 
+
+
+
+jQuery(function(){
+   
+   $(".my-foto").imagezoomsl({
+
+      zoomrange: [2.12, 12],
+      magnifiersize: [530, 340],
+      scrollspeedanimate: 10,
+      loopspeedanimate: 5,
+      cursorshadeborder: "10px solid black",
+      magnifiereffectanimate: "slideIn"					
+  });
+}); 
 </script>
 </html>

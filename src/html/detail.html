@@ -43,6 +43,7 @@
 <script src="../js/detail.js"></script>
 <script src="../lib/jquery/dist/jquery.min.js"></script>
 <script src="../js/cookie.js"></script>
+<script src="../lib/fangdajing/js/zoomsl.min.js"></script>
 <script>
     //1.获取localstorage里面的数字
     const productinfo = JSON.parse(localStorage.getItem('product_info'))
@@ -55,7 +56,8 @@
     let str = ''
     str = `
     <div class="left">
-            <img src="${productinfo.src}" alt="">
+        <img class="my-foto" src="${productinfo.src}"  data-large="${productinfo.src}" 
+                data-text-bottom="帅就完事了，买就完事了" title="Фото">
         </div>
         <div class="right">
             <p>${productinfo.name}</p>
@@ -134,5 +136,23 @@ let create_id=()=>{
     }
     return id
 }
+
+//放大镜效果
+$(function(){
+  $(".example").imagezoomsl();
+});
+
+jQuery(function(){
+   
+   $(".my-foto").imagezoomsl({
+
+      zoomrange: [2.12, 12],
+      magnifiersize: [730, 340],
+      scrollspeedanimate: 10,
+      loopspeedanimate: 5,
+      cursorshadeborder: "10px solid black",
+      magnifiereffectanimate: "slideIn"					
+  });
+}); 
 </script>
 </html>

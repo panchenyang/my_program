@@ -44,12 +44,14 @@
  }
  
 
- zhuce.onclick = function(){
+ zhuce.onclick = function(e){
+    e = e || window.event
+    e.preventDefault()
      let usernames = username.value
      let userpwds = userpwd.value
-    //  // console.log(usernames,userpwds);   
-    //  //3.表单验证
-    //  //非空验证
+     // console.log(usernames,userpwds);   
+     //3.表单验证
+     //非空验证
      if(!usernames || !userpwds){
          alert('请完整填写表单')
          return
@@ -60,7 +62,7 @@
     xhr.open('POST','/login1',true)
     //4-3接受响应 监听事件 
     xhr.onload = function(){
-        let res = JSON.parse(xhr.responseText)
+        // let res = JSON.parse(xhr.responseText)
     }
     //4-4设置响应头
     xhr.setRequestHeader('content-type','application/x-www-form-urlencoded');

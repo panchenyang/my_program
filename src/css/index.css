@@ -60,15 +60,16 @@ header .right ul li span{
 }
 
 /*nav*/
-#nav .nav{
-    float: left;
-    position: absolute;
-    z-index: 2;
-}
 #nav{
     background: #202020 ;
     height: 46px;
     position: relative;
+}
+
+#nav .nav{
+    float: left;
+    position: absolute;
+    z-index: 2;
 }
 
 #nav .nav_top ul li{
@@ -91,8 +92,7 @@ header .right ul li span{
 #nav .nav_box{
     width: 150px;
     height: 150px;
-    margin-top: -10px;
-    
+    margin-top: -10px;  
 }
 
 #nav .nav_box ul{
@@ -107,10 +107,10 @@ header .right ul li span{
     padding-left: 12px;
     margin-top: 8px;
 }
-
+/* 
 #nav .nav_box img{
     float: left;
-}
+} */
 
 #nav .search{
     float: right;
